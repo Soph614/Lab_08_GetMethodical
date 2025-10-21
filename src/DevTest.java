@@ -7,7 +7,7 @@ public class DevTest {
         String prompt = "";
         int low = 1;
         int high = 100;
-        getRangedDouble(pipe, prompt, low, high);
+        getYNConfirm(pipe, prompt);
     }
     public static String getNonZeroLenString(Scanner pipe, String prompt) {
         String retString = "";
@@ -92,7 +92,6 @@ public class DevTest {
         return low;
     }
     public static double getRangedDouble(Scanner pipe, String prompt, double low, double high) {
-        prompt = "Choose a double value between 1 and 100 inclusive";
         boolean done = false;
         do {
             System.out.print("\n" + prompt + ": ");
@@ -122,7 +121,20 @@ public class DevTest {
         return low;
     }
     public static boolean getYNConfirm(Scanner pipe, String prompt) {
-
+        String yesOrNo = "Y";
+        prompt = "If you're done, press Y, if not, press N";
+        boolean done = false;
+        do {
+            System.out.print("\n" + prompt + ": ");
+            yesOrNo = pipe.nextLine();
+            if (yesOrNo.equalsIgnoreCase("Y")) {
+                done = true;
+            } else if(yesOrNo.equalsIgnoreCase("N")) {
+                done = false;
+            } else {
+                System.out.println("That is not Y or N.");
+            }
+        } while (!yesOrNo.equalsIgnoreCase("Y") | !yesOrNo.equalsIgnoreCase("N"));
         return false;
     }
 
