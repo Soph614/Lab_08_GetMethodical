@@ -10,7 +10,7 @@ public class DevTest {
         yesNo = getYNConfirm(pipe, "Enter 'Y' or 'N'");
         System.out.println("Y = True, N = False, You entered " + yesNo + "\n");
          */
-        String giveYourSsn = getRegExString(pipe, "Give your SSN", "^\\d{3}-\\d{2}-\\d{4}$");
+        String giveYourMNumber = getRegExString(pipe, "Give your UC Student M Number", "^(M|m)\\d{5}$");
     }
     public static String getNonZeroLenString(Scanner pipe, String prompt) {
         String retString = "";
@@ -183,7 +183,7 @@ public class DevTest {
     public static String getRegExString(Scanner pipe, String prompt, String regEx) {
         String userNumber = "";
         boolean gotCorrectValue = false;
-
+        // pipe.nextLine();
         do {
             System.out.println("\n" + prompt + ": ");
             userNumber = pipe.nextLine();
@@ -192,6 +192,7 @@ public class DevTest {
             }
             else {
                 System.out.println("[" + userNumber + "] is incorrect. Please match the pattern " + regEx);
+                // pipe.nextLine();
             }
         } while(!gotCorrectValue);
         return userNumber;

@@ -12,7 +12,8 @@ public class CheckOut {
             pipe.nextLine();
             retVal = DevTest.getYNConfirm(pipe, "If you're done, press 'Y'; if not, press 'N'");
         } while(!retVal);
-        System.out.println("Your total price is $" + price + ".");
+        String totalPriceDisplay = "TOTAL PRICE:";
+        System.out.printf("%-14s%5s", totalPriceDisplay, price);
 
     }
 }
