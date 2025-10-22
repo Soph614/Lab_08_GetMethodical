@@ -6,9 +6,11 @@ import java.lang.String;
 public class DevTest {
     public static void main(String[] args) {
         Scanner pipe = new Scanner(System.in);
-        boolean yesNo;
+        /* boolean yesNo;
         yesNo = getYNConfirm(pipe, "Enter 'Y' or 'N'");
         System.out.println("Y = True, N = False, You entered " + yesNo + "\n");
+         */
+        String giveYourSsn = getRegExString(pipe, "Give your SSN", "^\\d{3}-\\d{2}-\\d{4}$");
     }
     public static String getNonZeroLenString(Scanner pipe, String prompt) {
         String retString = "";

@@ -31,6 +31,7 @@ public class SafeInput {
 
     public static double getDouble(Scanner pipe, String prompt) {
         boolean done = false;
+        double userDouble = 0;
         do {
             System.out.print("\n" + prompt + ": ");
             if (pipe.hasNextInt()) { // if it's an integer
@@ -38,7 +39,7 @@ public class SafeInput {
                 System.out.println("[" + intTrash + "] is not a double (_._) value.");
                 pipe.nextLine();
             } else if (pipe.hasNextDouble()) { // if it's a double value
-                double userDouble = pipe.nextDouble();
+                userDouble = pipe.nextDouble();
                 System.out.println("Your double value is " + userDouble + ".");
                 done = true;
             } else { // if it's a string value
@@ -47,7 +48,7 @@ public class SafeInput {
                 pipe.nextLine();
             }
         } while (!done);
-        return 0;
+        return userDouble;
     }
 
     public static int getRangedInt(Scanner pipe, String prompt, int low, int high) {
