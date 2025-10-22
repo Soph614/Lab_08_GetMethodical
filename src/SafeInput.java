@@ -125,21 +125,35 @@ public class SafeInput {
 
      */
     public static boolean getYNConfirm(Scanner pipe, String prompt) {
-        String yesOrNo = "N";
         boolean done = false;
         do {
             System.out.print("\n" + prompt + ": ");
-            yesOrNo = pipe.nextLine();
-            if (!yesOrNo.equalsIgnoreCase("Y") && !yesOrNo.equalsIgnoreCase("N")) {
-                System.out.println("That is not Y or N.");
-            } else if(yesOrNo.equalsIgnoreCase("N")) {
+            String yesOrNo = pipe.nextLine();
+            /* if (!yesOrNo.equalsIgnoreCase("Y") && !yesOrNo.equalsIgnoreCase("N")) {
+                System.out.println(yesOrNo = " is not Y or N.");
+            } else if (yesOrNo.equalsIgnoreCase("N")) {
                 done = false;
                 System.out.println("Y = True, N = False, you entered " + done + ".");
             } else { // if user input is 'Y'
                 done = true;
                 System.out.println("Y = True, N = False, you entered " + done + ".");
             }
-        } while (!yesOrNo.equalsIgnoreCase("Y") && !yesOrNo.equalsIgnoreCase("N"));
+             */
+            if(yesOrNo.equalsIgnoreCase("Y")) {
+                done = true;
+                System.out.println("Y = True, N = False, you entered " + done + ".");
+                System.exit(0);
+            }
+            else if(yesOrNo.equalsIgnoreCase("N")) {
+                done = false;
+                System.out.println("Y = True, N = False, you entered " + done + ".");
+            }
+            else if(yesOrNo.length() == 0) {
+            }
+            else {
+                System.out.println(yesOrNo + " is not Y or N.");
+            }
+        } while (!done);
         return false;
     }
     public static String getRegExString(Scanner pipe, String prompt, String regEx) {
