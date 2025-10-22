@@ -1,11 +1,14 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Scanner;
 import java.lang.String;
 
 public class DevTest {
     public static void main(String[] args) {
         Scanner pipe = new Scanner(System.in);
-        getRegExString(pipe, "Enter your phone number", "^\\d{3}-\\d{3}-\\d{4}$");
-        getYNConfirm(pipe, "If you're done, press 'Y'; if not, press 'N'");
+        boolean yesNo;
+        yesNo = getYNConfirm(pipe, "Enter 'Y' or 'N'");
+        System.out.println("Y = True, N = False, You entered " + yesNo + "\n");
     }
     public static String getNonZeroLenString(Scanner pipe, String prompt) {
         String retString = "";
@@ -118,14 +121,14 @@ public class DevTest {
         } while(!done);
         return low;
     }
-    public static boolean getYNConfirm(Scanner pipe, String prompt) {
+    /* public static boolean getYNConfirm(Scanner pipe, String prompt) {
         boolean returnValue = true;
         boolean gotAValue = false;
         String response = "";
         do {
             System.out.print("\n" + prompt + ": ");
             response = pipe.nextLine();
-            /* if (!yesOrNo.equalsIgnoreCase("Y") && !yesOrNo.equalsIgnoreCase("N")) {
+            \\ if (!yesOrNo.equalsIgnoreCase("Y") && !yesOrNo.equalsIgnoreCase("N")) {
                 System.out.println(yesOrNo = " is not Y or N.");
             } else if (yesOrNo.equalsIgnoreCase("N")) {
                 done = false;
@@ -134,7 +137,7 @@ public class DevTest {
                 done = true;
                 System.out.println("Y = True, N = False, you entered " + done + ".");
             }
-             */
+            //
             if(response.equalsIgnoreCase("Y")) {
                 returnValue = true;
                 System.out.println("Y = True, N = False, you entered " + returnValue + ".");
@@ -150,6 +153,30 @@ public class DevTest {
             }
         } while (!gotAValue);
         return false;
+    }
+     */
+    public static boolean getYNConfirm(Scanner pipe, String prompt) {
+        boolean retVal = true;
+        String response = "";
+        boolean gotAVal = false;
+
+        do {
+            System.out.print("\n" + prompt + " [Y/N]: ");
+            response = pipe.nextLine();
+            if(response.equalsIgnoreCase("Y")) {
+                gotAVal = true;
+                retVal = true;
+            }
+            else if(response.equalsIgnoreCase("N")) {
+                gotAVal = true;
+                retVal = false;
+            }
+            else {
+                System.out.println("You must answer [Y/N]! " + response);
+            }
+        } while(!gotAVal);
+
+        return retVal;
     }
     public static String getRegExString(Scanner pipe, String prompt, String regEx) {
         String userNumber = "";
