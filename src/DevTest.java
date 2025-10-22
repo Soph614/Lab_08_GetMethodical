@@ -4,11 +4,8 @@ import java.lang.String;
 public class DevTest {
     public static void main(String[] args) {
         Scanner pipe = new Scanner(System.in);
-        String prompt = "";
-        String regEx = "^\\d{3}-\\d{3}-\\d{4}$";
-        int low = 1;
-        int high = 100;
         getRegExString(pipe, "Enter your phone number", "^\\d{3}-\\d{3}-\\d{4}$");
+        getYNConfirm(pipe, "If you're done, press 'Y'; if not, press 'N'");
     }
     public static String getNonZeroLenString(Scanner pipe, String prompt) {
         String retString = "";
@@ -122,22 +119,36 @@ public class DevTest {
         return low;
     }
     public static boolean getYNConfirm(Scanner pipe, String prompt) {
-        prompt = "Enter 'Y' or 'N':\n\t[Y/N] ";
-        String yesOrNo = "N";
-        boolean done = false;
+        boolean returnValue = true;
+        boolean gotAValue = false;
+        String response = "";
         do {
             System.out.print("\n" + prompt + ": ");
-            yesOrNo = pipe.nextLine();
-            if (!yesOrNo.equalsIgnoreCase("Y") && !yesOrNo.equalsIgnoreCase("N")) {
-                System.out.println("That is not Y or N.");
-            } else if(yesOrNo.equalsIgnoreCase("N")) {
+            response = pipe.nextLine();
+            /* if (!yesOrNo.equalsIgnoreCase("Y") && !yesOrNo.equalsIgnoreCase("N")) {
+                System.out.println(yesOrNo = " is not Y or N.");
+            } else if (yesOrNo.equalsIgnoreCase("N")) {
                 done = false;
                 System.out.println("Y = True, N = False, you entered " + done + ".");
             } else { // if user input is 'Y'
                 done = true;
                 System.out.println("Y = True, N = False, you entered " + done + ".");
             }
-        } while (!yesOrNo.equalsIgnoreCase("Y") && !yesOrNo.equalsIgnoreCase("N"));
+             */
+            if(response.equalsIgnoreCase("Y")) {
+                returnValue = true;
+                System.out.println("Y = True, N = False, you entered " + returnValue + ".");
+            }
+            else if(response.equalsIgnoreCase("N")) {
+                returnValue = false;
+                System.out.println("Y = True, N = False, you entered " + returnValue + ".");
+            }
+            else if(response.length() == 0) {
+            }
+            else {
+                System.out.println(response + " is not Y or N.");
+            }
+        } while (!gotAValue);
         return false;
     }
     public static String getRegExString(Scanner pipe, String prompt, String regEx) {

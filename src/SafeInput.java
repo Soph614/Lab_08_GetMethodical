@@ -125,10 +125,12 @@ public class SafeInput {
 
      */
     public static boolean getYNConfirm(Scanner pipe, String prompt) {
-        boolean done = false;
+        boolean returnValue = true;
+        boolean gotAValue = false;
+        String response = "";
         do {
             System.out.print("\n" + prompt + ": ");
-            String yesOrNo = pipe.nextLine();
+            response = pipe.nextLine();
             /* if (!yesOrNo.equalsIgnoreCase("Y") && !yesOrNo.equalsIgnoreCase("N")) {
                 System.out.println(yesOrNo = " is not Y or N.");
             } else if (yesOrNo.equalsIgnoreCase("N")) {
@@ -139,21 +141,20 @@ public class SafeInput {
                 System.out.println("Y = True, N = False, you entered " + done + ".");
             }
              */
-            if(yesOrNo.equalsIgnoreCase("Y")) {
-                done = true;
-                System.out.println("Y = True, N = False, you entered " + done + ".");
-                System.exit(0);
+            if(response.equalsIgnoreCase("Y")) {
+                returnValue = true;
+                System.out.println("Y = True, N = False, you entered " + returnValue + ".");
             }
-            else if(yesOrNo.equalsIgnoreCase("N")) {
-                done = false;
-                System.out.println("Y = True, N = False, you entered " + done + ".");
+            else if(response.equalsIgnoreCase("N")) {
+                returnValue = false;
+                System.out.println("Y = True, N = False, you entered " + returnValue + ".");
             }
-            else if(yesOrNo.length() == 0) {
+            else if(response.length() == 0) {
             }
             else {
-                System.out.println(yesOrNo + " is not Y or N.");
+                System.out.println(response + " is not Y or N.");
             }
-        } while (!done);
+        } while (!gotAValue);
         return false;
     }
     public static String getRegExString(Scanner pipe, String prompt, String regEx) {
