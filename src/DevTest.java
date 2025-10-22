@@ -5,9 +5,10 @@ public class DevTest {
     public static void main(String[] args) {
         Scanner pipe = new Scanner(System.in);
         String prompt = "";
+        String regEx = "^\\d{3}-\\d{3}-\\d{4}$";
         int low = 1;
         int high = 100;
-        getYNConfirm(pipe, prompt);
+        getRegExString(pipe, "Enter your phone number", "^\\d{3}-\\d{3}-\\d{4}$");
     }
     public static String getNonZeroLenString(Scanner pipe, String prompt) {
         String retString = "";
@@ -121,21 +122,38 @@ public class DevTest {
         return low;
     }
     public static boolean getYNConfirm(Scanner pipe, String prompt) {
-        String yesOrNo = "Y";
-        prompt = "If you're done, press Y, if not, press N";
+        prompt = "Enter 'Y' or 'N':\n\t[Y/N] ";
+        String yesOrNo = "N";
         boolean done = false;
         do {
             System.out.print("\n" + prompt + ": ");
             yesOrNo = pipe.nextLine();
-            if (yesOrNo.equalsIgnoreCase("Y")) {
-                done = true;
+            if (!yesOrNo.equalsIgnoreCase("Y") && !yesOrNo.equalsIgnoreCase("N")) {
+                System.out.println("That is not Y or N.");
             } else if(yesOrNo.equalsIgnoreCase("N")) {
                 done = false;
-            } else {
-                System.out.println("That is not Y or N.");
+                System.out.println("Y = True, N = False, you entered " + done + ".");
+            } else { // if user input is 'Y'
+                done = true;
+                System.out.println("Y = True, N = False, you entered " + done + ".");
             }
-        } while (!yesOrNo.equalsIgnoreCase("Y") | !yesOrNo.equalsIgnoreCase("N"));
+        } while (!yesOrNo.equalsIgnoreCase("Y") && !yesOrNo.equalsIgnoreCase("N"));
         return false;
     }
+    public static String getRegExString(Scanner pipe, String prompt, String regEx) {
+        String userNumber = "";
+        boolean gotCorrectValue = false;
 
+        do {
+            System.out.println("\n" + prompt + ": ");
+            userNumber = pipe.nextLine();
+            if(userNumber.matches(regEx)) {
+                gotCorrectValue = true;
+            }
+            else {
+                System.out.println("[" + userNumber + "] is incorrect. Please match the pattern " + regEx);
+            }
+        } while(!gotCorrectValue);
+        return userNumber;
+    }
 }

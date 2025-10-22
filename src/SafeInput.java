@@ -13,7 +13,6 @@ public class SafeInput {
     public static int getInt(Scanner pipe, String prompt) {
         boolean done = false;
         do {
-            prompt = "Please give an integer";
             System.out.print("\n" + prompt + ": ");
             if (pipe.hasNextInt()) {
                 int userInt = pipe.nextInt();
@@ -32,39 +31,36 @@ public class SafeInput {
 
     public static double getDouble(Scanner pipe, String prompt) {
         boolean done = false;
-        prompt = "Please give a double value";
         do {
             System.out.print("\n" + prompt + ": ");
-            if (pipe.hasNextInt()) {
+            if (pipe.hasNextInt()) { // if it's an integer
                 int intTrash = pipe.nextInt();
-                System.out.println("[" + intTrash + "] is not a double value.");
+                System.out.println("[" + intTrash + "] is not a double (_._) value.");
                 pipe.nextLine();
-            } else if (pipe.hasNextDouble()) {
+            } else if (pipe.hasNextDouble()) { // if it's a double value
                 double userDouble = pipe.nextDouble();
                 System.out.println("Your double value is " + userDouble + ".");
                 done = true;
-            } else {
+            } else { // if it's a string value
                 String trash = pipe.nextLine();
-                System.out.println("[" + trash + "] is not a double value.");
-                // pipe.nextLine();
+                System.out.println("[" + trash + "] is not a double (_._) value.");
+                pipe.nextLine();
             }
         } while (!done);
         return 0;
     }
 
     public static int getRangedInt(Scanner pipe, String prompt, int low, int high) {
-
-        prompt = "Choose a number between 1 and 100 inclusive";
         boolean done = false;
         do {
             System.out.print("\n" + prompt + ": ");
             if (pipe.hasNextInt()) {
                 int userInt = pipe.nextInt();
-                if (userInt >= 1 && userInt <= 100) {
+                if (userInt >= low && userInt <= high) {
                     System.out.println("You chose " + userInt + ".");
                     done = true;
                 } else {
-                    System.out.println("That integer is not between 1 and 100 inclusive.");
+                    System.out.println("That integer is not between " + low + " and " + high + " inclusive.");
                 }
 
             } else if (pipe.hasNextDouble()) {
@@ -85,7 +81,7 @@ public class SafeInput {
     public static double getRangedDouble(Scanner pipe, String prompt, double low, double high) {
         boolean done = false;
         do {
-            System.out.print("\n" + prompt + ": ");
+            System.out.print("\n" + prompt + " (must be a value between " + low + " and " + high + " inclusive): ");
             if (pipe.hasNextInt()) {
                 int trash = pipe.nextInt();
                 System.out.println("[" + trash + "] is not a double value at all.");
@@ -109,7 +105,7 @@ public class SafeInput {
         return low;
     }
 
-    public static boolean getYNConfirm(Scanner pipe, String prompt) {
+    /* public static boolean getYNConfirm(Scanner pipe, String prompt) {
         String yesOrNo = "Y";
         prompt = "If you're done, press Y, if not, press N";
         boolean done = false;
@@ -125,6 +121,30 @@ public class SafeInput {
             }
         } while (!yesOrNo.equalsIgnoreCase("Y") | !yesOrNo.equalsIgnoreCase("N"));
         return false;
+    }
+
+     */
+    public static boolean getYNConfirm(Scanner pipe, String prompt) {
+        String yesOrNo = "N";
+        boolean done = false;
+        do {
+            System.out.print("\n" + prompt + ": ");
+            yesOrNo = pipe.nextLine();
+            if (!yesOrNo.equalsIgnoreCase("Y") && !yesOrNo.equalsIgnoreCase("N")) {
+                System.out.println("That is not Y or N.");
+            } else if(yesOrNo.equalsIgnoreCase("N")) {
+                done = false;
+                System.out.println("Y = True, N = False, you entered " + done + ".");
+            } else { // if user input is 'Y'
+                done = true;
+                System.out.println("Y = True, N = False, you entered " + done + ".");
+            }
+        } while (!yesOrNo.equalsIgnoreCase("Y") && !yesOrNo.equalsIgnoreCase("N"));
+        return false;
+    }
+    public static String getRegExString(Scanner pipe, String prompt, String regEx) {
+
+        return prompt;
     }
 }
 
