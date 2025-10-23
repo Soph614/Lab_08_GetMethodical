@@ -10,7 +10,7 @@ public class CheckOut {
             userDouble = SafeInput.getRangedDouble(pipe, "Enter the price of your item", .50, 10.00);
             price = userDouble + price;
             // pipe.nextLine();
-            retVal = DevTest.getYNConfirm(pipe, "If you're done, press 'Y'; if not, press 'N'");
+            retVal = SafeInput.getYNConfirm(pipe, "If you're done, press 'Y'; if not, press 'N'");
         } while(!retVal);
         System.out.printf("TOTAL PRICE: %5s", price);
 
