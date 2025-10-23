@@ -95,33 +95,27 @@ public class DevTest {
         return low;
     }
     public static double getRangedDouble(Scanner pipe, String prompt, double low, double high) {
+        double retVal = 0;
+        String trash = "";
         boolean done = false;
+
         do {
-            System.out.print("\n" + prompt + ": ");
-            if (pipe.hasNextInt()) {
-                int trash = pipe.nextInt();
-                System.out.println("[" + trash + "] is not a double value at all.");
+            System.out.print("\n" + prompt + "[" + low + "-" + high + "]: ");
+            if (pipe.hasNextDouble()) {
+                retVal = pipe.nextDouble();
                 pipe.nextLine();
-
-            }
-            else if (pipe.hasNextDouble()) {
-                double userDouble = pipe.nextDouble();
-                if(userDouble >= 1 && userDouble <= 100) {
-                    System.out.println("You chose " + userDouble + ".");
+                if (retVal >= low && retVal <= high) {
                     done = true;
+                } else {
+                    System.out.println("\nNumber is out of range {" + low + "-" + high + "]: " + retVal);
                 }
-                else {
-                    System.out.println("That double value is not between " + low + " and " + high + " inclusive.");
-                }
+            } else {
+                trash = pipe.nextLine();
+                System.out.println("You must enter a double: " + trash);
             }
-            else {
-                String trash = pipe.nextLine();
-                System.out.println("[" + trash + "] is not a double value at all.");
-                // pipe.nextLine();
-            }
+        } while (!done);
 
-        } while(!done);
-        return low;
+        return retVal;
     }
     /* public static boolean getYNConfirm(Scanner pipe, String prompt) {
         boolean returnValue = true;
